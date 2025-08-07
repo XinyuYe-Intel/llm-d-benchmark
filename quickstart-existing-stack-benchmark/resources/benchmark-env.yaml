@@ -6,10 +6,10 @@ metadata:
 data:
   # UPDATE TO MATCH YOUR CLUSTER & DEPLOYMENT
   # Core benchmark configuration
-  LLMDBENCH_FMPERF_NAMESPACE: "llm-d-benchmark"
+  LLMDBENCH_HARNESS_NAMESPACE: "llm-d-benchmark"
   LLMDBENCH_HARNESS_STACK_TYPE: "llm-d"
-  LLMDBENCH_HARNESS_ENDPOINT_URL: "http://llm-d-inference-gateway.llm-d.svc.cluster.local:80"
-  LLMDBENCH_HARNESS_STACK_NAME: "llm-d-3b"
+  LLMDBENCH_HARNESS_STACK_ENDPOINT_URL: "http://llm-d-inference-gateway-istio.llm-d.svc.cluster.local:80"
+  LLMDBENCH_HARNESS_STACK_NAME: "llm-d-qwen3-0.6b"
   LLMDBENCH_HARNESS_WORKLOAD_FILE: "llmdbench_workload.yaml"
   LLMDBENCH_FMPERF_REPETITION: "1"
   LLMDBENCH_HARNESS_RESULTS_DIR: "/requests"

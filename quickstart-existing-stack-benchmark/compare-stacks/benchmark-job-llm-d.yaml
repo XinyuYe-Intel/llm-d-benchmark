@@ -1,21 +1,21 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: benchmark-analysis
+  name: llm-d-benchmark-run
   namespace: llm-d-benchmark
 spec:
   backoffLimit: 0
   template:
     metadata:
       labels:
-        app: llm-d-benchmark-analysis
+        app: llm-d-benchmark
     spec:
       serviceAccountName: benchmark-runner
       securityContext:
         seccompProfile:
           type: RuntimeDefault
       containers:
-      - name: analysis
+      - name: evaluation
         # TODO: UPDATE IMAGE
         image: llm-d-benchmark:quickstart
         imagePullPolicy: Never
@@ -27,20 +27,21 @@ spec:
           seccompProfile:
             type: RuntimeDefault
         command: ["sh"]
-        args: ["-c", "mkdir -p /requests/analysis/plots /requests/analysis/data && python3 /workspace/analysis/fmperf-analyze_results.py --results-dir /requests && echo 'Analysis complete! Results saved to /requests/analysis/'"]
-        env:
-        - name: LLMDBENCH_CONTROL_WORK_DIR
-          value: "/requests"
-        - name: LLMDBENCH_HARNESS_RESULTS_DIR
-          value: "/requests"
-        # Set matplotlib backend to non-interactive for headless operation
-        - name: MPLBACKEND
-          value: "Agg"
+        args: ["-c", "cat /workspace/config/llmdbench_llm_d_workload.yaml && mkdir /workspace/profiles/ && mkdir /workspace/profiles/fmperf/ && ln -sf /workspace/config/llmdbench_llm_d_workload.yaml /workspace/profiles/fmperf/llmdbench_workload.yaml && python3 /workspace/workload/harnesses/fmperf-llm-d-benchmark.py"]
+        envFrom:
+        - configMapRef:
+            name: llm-d-benchmark-env
         volumeMounts:
         - name: results
           mountPath: /requests
+        - name: workload-file
+          mountPath: /workspace/config
+          readOnly: true
       volumes:
       - name: results
         persistentVolumeClaim:
-          claimName: benchmark-results-pvc
+          claimName: llm-d-results-pvc
+      - name: workload-file
+        configMap:
+          name: benchmark-workload-config
       restartPolicy: Never

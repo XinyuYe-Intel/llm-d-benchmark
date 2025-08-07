@@ -6,10 +6,10 @@ metadata:
 data:
   # UPDATE TO MATCH YOUR CLUSTER & DEPLOYMENT
   # Core benchmark configuration
-  LLMDBENCH_FMPERF_NAMESPACE: "llm-d-benchmark"
+  LLMDBENCH_HARNESS_NAMESPACE: "llm-d-benchmark"
   LLMDBENCH_HARNESS_STACK_TYPE: "vllm-prod"
-  LLMDBENCH_HARNESS_ENDPOINT_URL: "https://vllm-service.vllm-namespace.cluster.local.svc"
-  LLMDBENCH_HARNESS_STACK_NAME: "standalone-vllm-llama-3b"
+  LLMDBENCH_HARNESS_STACK_ENDPOINT_URL: "http://192.168.49.2:8192"
+  LLMDBENCH_HARNESS_STACK_NAME: "standalone-vllm-qwen3-8b"
   LLMDBENCH_HARNESS_WORKLOAD_FILE: "llmdbench_workload.yaml"
   LLMDBENCH_FMPERF_REPETITION: "1"
   LLMDBENCH_HARNESS_RESULTS_DIR: "/requests"
@@ -22,10 +22,10 @@ metadata:
 data:
   # UPDATE TO MATCH YOUR CLUSTER & DEPLOYMENT
   # Core benchmark configuration
-  LLMDBENCH_FMPERF_NAMESPACE: "llm-d-benchmark"
+  LLMDBENCH_HARNESS_NAMESPACE: "llm-d-benchmark"
   LLMDBENCH_HARNESS_STACK_TYPE: "llm-d"
-  LLMDBENCH_HARNESS_ENDPOINT_URL: "http://llm-d-inference-gateway.llm-d.svc.cluster.local:80"
-  LLMDBENCH_HARNESS_STACK_NAME: "llm-d-llama-3b"
+  LLMDBENCH_HARNESS_STACK_ENDPOINT_URL: "http://llm-d-inference-gateway-istio.llm-d.svc.cluster.local:80"
+  LLMDBENCH_HARNESS_STACK_NAME: "llm-d-qwen3-8b"
   LLMDBENCH_HARNESS_WORKLOAD_FILE: "llmdbench_workload.yaml"
   LLMDBENCH_FMPERF_REPETITION: "1"
   LLMDBENCH_HARNESS_RESULTS_DIR: "/requests"

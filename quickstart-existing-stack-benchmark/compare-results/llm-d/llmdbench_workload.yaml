@@ -1,0 +1,8 @@
+# LMBenchmark Workload Configuration for LLM-D Benchmark
+# must match model_endpoint/v1/models
+model_name: "Qwen/Qwen3-0.6B"
+scenarios: "long-input"
+qps_values: "0.5 1.0 2.0"
+image: "lmcache/lmcache-benchmark:main"
+service_account: "benchmark-runner"
+pvc_name: "llm-d-results-pvc"

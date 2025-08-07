@@ -27,6 +27,7 @@ Create the required namespace, serviceaccount, and RBAC resources:
 kubectl create namespace llm-d-benchmark
 kubectl apply -f resources/sa.yaml
 kubectl apply -f resources/rbac.yaml
+kubectl apply -k compare-stacks/resources
 ```
 
 ### 1. Configure the Benchmark Jobs
@@ -40,11 +41,19 @@ the [compare-workload-configmaps](./compare-stacks/resources/compare-workload-co
 The benchmark jobs will create and monitor their respective evaluation jobs:
 
 ```bash
-# Run both benchmark jobs
-kubectl apply -f ./compare-stacks/benchmark-job.yaml
+docker build -t llm-d-benchmark:quickstart .. -f Dockerfile
+
+minikube image load llm-d-benchmark:quickstart
+minikube image load gar-registry.caas.intel.com/pytorch/pytorch-ipex-spr:multi-bmg_pytorch_2_8_nixl_xpu
+
+# Run standalone benchmark jobs
+kubectl apply -f ./compare-stacks/benchmark-job-vllm.yaml
 
 # Check logs for standalone job
 kubectl logs -f job/standalone-benchmark-run -n llm-d-benchmark
+
+# Run llm-d benchmark jobs
+kubectl apply -f ./compare-stacks/benchmark-job-llm-d.yaml
 
 # Check logs for llm-d job
 kubectl logs -f job/llm-d-benchmark-run -n llm-d-benchmark

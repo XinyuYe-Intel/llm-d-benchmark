@@ -7,8 +7,8 @@ data:
   llmdbench_llm_d_workload.yaml: |
     # LMBenchmark Workload Configuration for LLM-D Benchmark
     # must match model_endpoint/v1/models
-    model_name: "meta-llama/Llama-3.2-3B-Instruct"
-    scenarios: "long-input"
+    model_name: "Qwen/Qwen3-8B"
+    scenarios: "sharegpt"
     qps_values: "0.1 0.25 0.5"
     image: "lmcache/lmcache-benchmark:main"
     service_account: "benchmark-runner"
@@ -16,8 +16,8 @@ data:
   llmdbench_standalone_workload.yaml: |
     # LMBenchmark Workload Configuration for LLM-D Benchmark
     # must match model_endpoint/v1/models
-    model_name: "llama32-3b"
-    scenarios: "long-input"
+    model_name: "Qwen/Qwen3-8B"
+    scenarios: "sharegpt"
     qps_values: "0.1 0.25 0.5"
     image: "lmcache/lmcache-benchmark:main"
     service_account: "benchmark-runner"

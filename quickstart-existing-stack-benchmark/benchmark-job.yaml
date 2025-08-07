@@ -17,8 +17,8 @@ spec:
       containers:
       - name: evaluation
         # TODO: UPDATE IMAGE
-        image: quay.io/sallyom/llm-d-benchmark:quickstart
-        imagePullPolicy: Always
+        image: llm-d-benchmark:quickstart
+        imagePullPolicy: Never
         securityContext:
           seccompProfile:
             type: RuntimeDefault
@@ -27,7 +27,7 @@ spec:
             drop:
               - ALL
         command: ["sh"]
-        args: ["-c", "ln -sf /workspace/config/llmdbench_workload.yaml /workspace/llmdbench_workload.yaml && python3 /workspace/workload/harnesses/fmperf-llm-d-benchmark.py"]
+        args: ["-c", "cat /workspace/config/llmdbench_workload.yaml && mkdir /workspace/profiles/ && mkdir /workspace/profiles/fmperf/ && ln -sf /workspace/config/llmdbench_workload.yaml /workspace/profiles/fmperf/llmdbench_workload.yaml && python3 /workspace/workload/harnesses/fmperf-llm-d-benchmark.py"]
         envFrom:
         - configMapRef:
             name: benchmark-env

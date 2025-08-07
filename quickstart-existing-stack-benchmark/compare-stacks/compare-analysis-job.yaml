@@ -17,8 +17,8 @@ spec:
       containers:
       - name: analysis
         # TODO: UPDATE IMAGE
-        image: quay.io/sallyom/llm-d-benchmark:quickstart
-        imagePullPolicy: Always
+        image: llm-d-benchmark:quickstart
+        imagePullPolicy: Never
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

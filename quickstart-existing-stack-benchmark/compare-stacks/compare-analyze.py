@@ -22,13 +22,13 @@ def load_and_combine_csvs(directory, system_name):
         return None
 
     # Look for LMBench CSV files directly in the directory
-    csv_files = glob.glob(os.path.join(directory, "LMBench_long_input_output_*.csv"))
+    csv_files = glob.glob(os.path.join(directory, "LMBench_*_output_*.csv"))
 
     # Also check for CSV files in any subdirectories (model directories)
     subdirs = [d for d in os.listdir(directory) if os.path.isdir(os.path.join(directory, d)) and not d.startswith('.')]
     for subdir in subdirs:
         subdir_path = os.path.join(directory, subdir)
-        subdir_csv_files = glob.glob(os.path.join(subdir_path, "LMBench_long_input_output_*.csv"))
+        subdir_csv_files = glob.glob(os.path.join(subdir_path, "LMBench_*_output_*.csv"))
         csv_files.extend(subdir_csv_files)
 
         # Check for nested subdirectories (in case of stack_name/model_name structure)

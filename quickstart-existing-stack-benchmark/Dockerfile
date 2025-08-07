@@ -1,20 +1,20 @@
 # Multi-stage build: Use the existing llm-d-benchmark image as source
-FROM ghcr.io/llm-d/llm-d-benchmark:v0.0.8 as base
+FROM ghcr.io/llm-d/llm-d-benchmark:v0.2.2
 
-FROM registry.access.redhat.com/ubi9/python-39:latest
+#FROM registry.access.redhat.com/ubi9/python-39:latest
 
 # Switch to root to install packages
 USER root
 
 # Copy requirements and install Python dependencies
-COPY --from=base /requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+#COPY --from=base /requirements.txt /tmp/requirements.txt
+#RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy and install fmperf properly
-COPY --from=base /workspace/fmperf /workspace/fmperf
-RUN cd /workspace/fmperf && \
-    pip install --no-cache-dir -r requirements.txt && \
-    python3 setup.py install
+#COPY --from=base /workspace/fmperf /workspace/fmperf
+#RUN cd /workspace/fmperf && \
+#    pip install --no-cache-dir -r requirements.txt && \
+#    python3 setup.py install
 
 # Copy the workload directory (contains the harness script)
 COPY workload /workspace/workload

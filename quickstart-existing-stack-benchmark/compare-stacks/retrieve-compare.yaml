@@ -8,7 +8,7 @@ spec:
   serviceAccountName: benchmark-runner
   containers:
   - name: results-retriever
-    image: registry.redhat.io/ubi9/ubi:latest
+    image: registry.access.redhat.com/ubi9/ubi:latest
     imagePullPolicy: IfNotPresent
     securityContext:
       allowPrivilegeEscalation: false
